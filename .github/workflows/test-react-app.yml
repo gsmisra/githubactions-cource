@@ -40,14 +40,12 @@ jobs:
           cache-dependency-path: 02StartingProject/package-lock.json
 
       - name: Install dependencies
+        working-directory: 02StartingProject
         run: npm install
 
       - name: Build the app
+        working-directory: 02StartingProject
         run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./02StartingProject/build
-          run: "echo 'Deploying to GitHub Pages...'"
+        run: "echo 'Deploying to GitHub Pages...'"
