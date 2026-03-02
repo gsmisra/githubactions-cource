@@ -1,1 +1,9 @@
 .DS_Store
+*/node_modules
+*.log
+*.env
+dist/
+build/
+coverage/
+.idea/
+.vscode/
