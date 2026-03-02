@@ -5,6 +5,9 @@ on: push
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: /02StartingProject/
     steps:
       - name: Get latest code from repo
         uses: actions/checkout@v3
