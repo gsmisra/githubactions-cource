@@ -1,0 +1,11 @@
+name: Output informaition
+
+on: workflow_dispatch
+
+jobs:
+  info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output github context
+        run: echo "${{ toJson(github) }}" # this is a reserved keyword, you can not use it as a variable name
+
