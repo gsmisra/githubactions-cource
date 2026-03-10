@@ -3,7 +3,12 @@ name: Events demo
 on:
   pull_request:
     types: [opened]
+
   workflow_dispatch:
+
+  push:
+    branches:
+      - main
 
 jobs:
   demo:
@@ -14,3 +19,22 @@ jobs:
           echo "Event name: ${{ github.event_name }}"
           echo "Event action: ${{ github.event.action }}"
           echo "Pull request title: ${{ github.event.pull_request.title }}"
+
+      - name: Trigger CT phase in test repository
+        env:
+          TOKEN: ${{ secrets.CT_TRIGGER_TOKEN }}
+          TARGET_REPO: gsmisra/CT-Demo-Repo
+        run: |
+
+          curl -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $TOKEN" \
+            https://api.github.com/repos/$TARGET_REPO/dispatches \
+            -d '{
+              "event_type": "ct-phase",
+              "client_payload": {
+                "source_repo": "'"${{ github.repository }}"'",
+                "source_event": "'"${{ github.event_name }}"'",
+                "source_ref": "'"${{ github.ref }}"'"
+              }
+             }'
