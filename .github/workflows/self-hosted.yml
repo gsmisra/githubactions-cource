@@ -1,0 +1,27 @@
+name: CI (self-hosted)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Run on cicd-runner
+    runs-on:
+      - self-hosted
+      - cicd-runner
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: repo
+
+      - name: Run a simple command
+        shell: bash
+        run: |
+          echo "Triggered by push to main on $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          echo "Runner: $RUNNER_NAME"
+          echo "Repo: $GITHUB_REPOSITORY"
+          echo "SHA: $GITHUB_SHA"
