@@ -10,7 +10,6 @@ jobs:
   build:
     name: Run on cicd-runner
     runs-on:
-      - self-hosted
       - cicd-runner
 
     steps:
@@ -26,3 +25,6 @@ jobs:
           echo "Runner: $RUNNER_NAME"
           echo "Repo: $GITHUB_REPOSITORY"
           echo "SHA: $GITHUB_SHA"
+
+      - name: Docker command
+        run: docker run ubuntu:22.04 echo "This runs inside Docker"
