@@ -11,6 +11,7 @@ jobs:
     name: Run on cicd-runner
     runs-on:
       - cicd-runner
+      - self-hosted
 
     outputs:
       runner-name: ${{ runner.name }}
